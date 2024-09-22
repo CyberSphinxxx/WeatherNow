@@ -1,9 +1,8 @@
 
 const apiKey = '4525a9ec3053fd7b173e9195f33778f1';
 
-// Function to get weather based on city name
-async function getWeather() {
-    const city = document.getElementById('city').value;
+// Function to get weather based on the city input
+async function getWeatherByCity(city) {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
     try {
@@ -11,28 +10,27 @@ async function getWeather() {
         const data = await response.json();
 
         if (data.cod === 200) {
-            displayWeather(data);
-        } else {
-            document.getElementById('result').innerHTML = `<p>${data.message}</p>`;
+            // Successfully fetched weather data
+            document.getElementById('cityName').textContent = `${data.name}, ${data.sys.country}`;
+            document.getElementById('temperature').textContent = `Temperature: ${data.main.temp}°C`;
+            document.getElementById('weatherDescription').textContent = `Weather: ${data.weather[0].description}`;
+        }
+        
+        else {
+            // Handle the error, city not found, etc.
+            document.getElementById('cityName').textContent = 'City not found';
+            document.getElementById('temperature').textContent = '';
+            document.getElementById('weatherDescription').textContent = '';
         }
     } catch (error) {
         console.error('Error fetching the weather data:', error);
-        document.getElementById('result').innerHTML = `<p>Something went wrong. Please try again.</p>`;
+        document.getElementById('cityName').textContent = 'Error fetching weather data';
+        document.getElementById('temperature').textContent = '';
+        document.getElementById('weatherDescription').textContent = '';
     }
 }
 
-// Function to display the weather information
-function displayWeather(data) {
-    const resultDiv = document.getElementById('result');
-    resultDiv.innerHTML = `
-        <h3>${data.name}, ${data.sys.country}</h3>
-        <p>Temperature: ${data.main.temp} °C</p>
-        <p>Weather: ${data.weather[0].description}</p>
-        <p>Humidity: ${data.main.humidity}%</p>
-    `;
-}
-
-// Function to get weather based on geolocation (current location)
+// Function to get the user's current location and fetch weather data
 async function getWeatherByLocation(lat, lon) {
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
 
@@ -41,18 +39,32 @@ async function getWeatherByLocation(lat, lon) {
         const data = await response.json();
 
         if (data.cod === 200) {
-            displayWeather(data);
+            // Successfully fetched weather data for location
+            document.getElementById('cityName').textContent = `${data.name}, ${data.sys.country}`;
+            document.getElementById('temperature').textContent = `Temperature: ${data.main.temp}°C`;
+            document.getElementById('weatherDescription').textContent = `Weather: ${data.weather[0].description}`;
         } else {
-            document.getElementById('result').innerHTML = `<p>${data.message}</p>`;
+            // Handle errors
+            document.getElementById('cityName').textContent = 'Location not found';
         }
     } catch (error) {
         console.error('Error fetching the weather data:', error);
-        document.getElementById('result').innerHTML = `<p>Something went wrong. Please try again.</p>`;
+        document.getElementById('cityName').textContent = 'Error fetching weather data';
     }
 }
 
-// Function to get the user's current location
-function getUserLocation() {
+// Function to handle the button click for getting weather by city
+document.getElementById('getWeatherBtn').addEventListener('click', function () {
+    const city = document.getElementById('cityInput').value;
+    if (city) {
+        getWeatherByCity(city);
+    } else {
+        document.getElementById('cityName').textContent = 'Please enter a city name';
+    }
+});
+
+// Automatically get weather based on the user's location when the page loads
+window.onload = function () {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             (position) => {
@@ -62,15 +74,10 @@ function getUserLocation() {
             },
             (error) => {
                 console.error('Error getting location:', error);
-                document.getElementById('result').innerHTML = `<p>Unable to retrieve your location. Please enter a city.</p>`;
+                document.getElementById('cityName').textContent = 'Unable to get location';
             }
         );
     } else {
-        document.getElementById('result').innerHTML = `<p>Geolocation is not supported by this browser.</p>`;
+        document.getElementById('cityName').textContent = 'Geolocation not supported by this browser';
     }
-}
-
-// Automatically get the user's weather when the page loads
-window.onload = () => {
-    getUserLocation();
 };

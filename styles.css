@@ -1,48 +1,122 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     background-color: #e0f7fa;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-image: url(background.jpg);
+    background-image: url('background.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
 }
 
-.container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+/* Main Container */
+#bg_container {
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
     text-align: center;
 }
 
-#bg_container{
-    background-color: rgba(225, 225, 225, 0.7);
-    padding: 5%;
-    border-radius: 10px;
+/* Universal Box Sizing */
+* {
+    box-sizing: border-box; /* Ensures padding and border are included in width */
 }
 
+/* Input and Button Styling */
 input, button {
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
+    width: 95%; /* Ensure both have the same width */
+    padding: 12px 15px;
+    margin: 12px 0;
+    border-radius: 8px;
     border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+/* Get Weather Button Styling */
+button {
+    background-color: #00796b;
+    color: white;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #004d40;
 }
 
 .weather-info {
-    margin-top: 20px; 
+    margin-top: 25px;
+    color: #333;
+}
+
+#cityName {
+    font-size: 1.8em;
+    font-weight: 600;
+    color: #00796b;
 }
 
 #temperature {
-    font-size: 2em;
+    font-size: 2.5em;
     font-weight: bold;
+    color: #ff5722;
+    margin-top: 10px;
 }
 
 #weatherDescription {
     font-size: 1.2em;
     color: #666;
+    margin-top: 5px;
+}
+
+@media (max-width: 600px) {
+    #bg_container {
+        padding: 30px 20px;
+        width: 90%;
+    }
+
+    #temperature {
+        font-size: 2em;
+    }
+}
+
+.footer {
+    position: fixed;
+    bottom: 10px; 
+    right: 10px;
+    font-size: 14px;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.footer_name {
+    position: fixed;
+    bottom: 10px; 
+    right: 10px;
+    font-size: 14px;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.footer_github {
+    position: fixed;
+    bottom: 10px; 
+    left: 10px;
+    font-size: 14px;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
 }
