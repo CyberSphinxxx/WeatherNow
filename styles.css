@@ -10,6 +10,7 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    transition: background-position 1s ease;
 }
 
 * {

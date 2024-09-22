@@ -1,3 +1,4 @@
+
 const apiKey = '4525a9ec3053fd7b173e9195f33778f1';
 
 // Function to get weather based on the city input
@@ -126,4 +127,16 @@ document.getElementById('showMoreBtn').addEventListener('click', function () {
         moreInfoContainer.style.display = 'none'; // Hide the container
         document.getElementById('showMoreBtn').textContent = 'Show More Info';
     }
+});
+
+// Paralax effect on cursor movement
+document.addEventListener('mousemove', function(e) {
+    const body = document.body;
+    
+    // Calculate the movement of the background based on the cursor position
+    const moveX = (e.clientX / window.innerWidth) * 5; // Horizontal movement
+    const moveY = (e.clientY / window.innerHeight) * 5; // Vertical movement
+
+    // Update background position based on mouse movement
+    document.body.style.backgroundPosition = `${moveX}% ${moveY}%`;
 });
