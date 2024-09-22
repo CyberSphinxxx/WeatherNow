@@ -74,7 +74,13 @@ window.onload = function () {
             },
             (error) => {
                 console.error('Error getting location:', error);
-                document.getElementById('cityName').textContent = 'Unable to get location';
+                if (error.code === error.PERMISSION_DENIED) {
+                    document.getElementById('cityName').textContent = 'Location access denied. Please enter a city.';
+                }
+                
+                else {
+                    document.getElementById('cityName').textContent = 'Unable to get location.';
+                }
             }
         );
     } else {
