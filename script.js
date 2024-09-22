@@ -1,4 +1,3 @@
-
 const apiKey = '4525a9ec3053fd7b173e9195f33778f1';
 
 // Function to get weather based on the city input
@@ -11,22 +10,33 @@ async function getWeatherByCity(city) {
 
         if (data.cod === 200) {
             // Successfully fetched weather data
-            document.getElementById('cityName').textContent = `${data.name}, ${data.sys.country}`;
-            document.getElementById('temperature').textContent = `Temperature: ${data.main.temp}°C`;
-            document.getElementById('weatherDescription').textContent = `Weather: ${data.weather[0].description}`;
+            document.getElementById('cityName').textContent            = `${data.name}, ${data.sys.country}`;
+            document.getElementById('temperature').textContent         = `Temperature: ${data.main.temp}°C`;
+            document.getElementById('weatherDescription').textContent  = `Weather: ${data.weather[0].description}`;
+
+
+            // More detailed weather info
+            document.getElementById('humidity').textContent  = `Humidity: ${data.main.humidity}%`;
+            document.getElementById('windSpeed').textContent = `Wind Speed: ${data.wind.speed} m/s`;
+            document.getElementById('weatherIcon').src       = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+
+            // Show more info container
+            document.getElementById('moreInfoContainer').style.display = 'none'; // Initially hide
         }
         
         else {
             // Handle the error, city not found, etc.
-            document.getElementById('cityName').textContent = 'City not found';
-            document.getElementById('temperature').textContent = '';
-            document.getElementById('weatherDescription').textContent = '';
+            document.getElementById('cityName').textContent             = 'City not found';
+            document.getElementById('temperature').textContent          = '';
+            document.getElementById('weatherDescription').textContent   = '';
+            document.getElementById('humidity').textContent             = '';
+            document.getElementById('windSpeed').textContent            = '';
         }
-    } catch (error) {
+    }
+    
+    catch (error) {
         console.error('Error fetching the weather data:', error);
         document.getElementById('cityName').textContent = 'Error fetching weather data';
-        document.getElementById('temperature').textContent = '';
-        document.getElementById('weatherDescription').textContent = '';
     }
 }
 
@@ -36,18 +46,28 @@ async function getWeatherByLocation(lat, lon) {
 
     try {
         const response = await fetch(url);
-        const data = await response.json();
+        const data     = await response.json();
 
         if (data.cod === 200) {
             // Successfully fetched weather data for location
-            document.getElementById('cityName').textContent = `${data.name}, ${data.sys.country}`;
-            document.getElementById('temperature').textContent = `Temperature: ${data.main.temp}°C`;
+            document.getElementById('cityName').textContent           = `${data.name}, ${data.sys.country}`;
+            document.getElementById('temperature').textContent        = `Temperature: ${data.main.temp}°C`;
             document.getElementById('weatherDescription').textContent = `Weather: ${data.weather[0].description}`;
-        } else {
+
+
+            // More detailed weather info
+            document.getElementById('humidity').textContent  = `Humidity: ${data.main.humidity}%`;
+            document.getElementById('windSpeed').textContent = `Wind Speed: ${data.wind.speed} m/s`;
+            document.getElementById('weatherIcon').src       = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+        }
+        
+        else {
             // Handle errors
             document.getElementById('cityName').textContent = 'Location not found';
         }
-    } catch (error) {
+    }
+    
+    catch (error) {
         console.error('Error fetching the weather data:', error);
         document.getElementById('cityName').textContent = 'Error fetching weather data';
     }
@@ -58,7 +78,9 @@ document.getElementById('getWeatherBtn').addEventListener('click', function () {
     const city = document.getElementById('cityInput').value;
     if (city) {
         getWeatherByCity(city);
-    } else {
+    }
+    
+    else {
         document.getElementById('cityName').textContent = 'Please enter a city name';
     }
 });
@@ -83,7 +105,25 @@ window.onload = function () {
                 }
             }
         );
-    } else {
+
+    }
+    
+    else {
         document.getElementById('cityName').textContent = 'Geolocation not supported by this browser';
     }
 };
+
+// Function to handle the button click for showing more info
+document.getElementById('showMoreBtn').addEventListener('click', function () {
+    const moreInfoContainer = document.getElementById('moreInfoContainer');
+
+    if (moreInfoContainer.style.display === 'none' || moreInfoContainer.style.display === '') {
+        moreInfoContainer.style.display = 'block'; // Show the container
+        document.getElementById('showMoreBtn').textContent = 'Hide More Info';
+    }
+    
+    else {
+        moreInfoContainer.style.display = 'none'; // Hide the container
+        document.getElementById('showMoreBtn').textContent = 'Show More Info';
+    }
+});

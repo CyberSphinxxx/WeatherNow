@@ -8,30 +8,43 @@
 </head>
 
 <body>
-    <div id="bg_container">
-        <div class="box_container">
+    <div id="containerWrapper">
+        <div id="bg_container">
             <h1 style="text-align: center;">Weather App☀️</h1>
-            
+    
             <input type="text" id="cityInput" placeholder="Enter city name">
-            
             <button id="getWeatherBtn">Get Weather</button>
-            
+    
             <div class="weather-info">
-
                 <div class="info_container">
                     <h2 id="cityName"></h2>
                 </div>
-                
                 <div class="info_container">
                     <p id="temperature"></p>
                 </div>
-
                 <div class="info_container">
                     <p id="weatherDescription"></p>
                 </div>
+
+                <div id="weatherType"></div>
+
+
+            </div>
+    
+            <button id="showMoreBtn">Show More Info</button>
+        </div>
+    
+        <!-- New Detailed Weather Info Container -->
+        <div id="moreInfoContainer" style="display: none;">
+            <h2>More Weather Info</h2>
+            <div class="info_container">
+                <p id="humidity"></p>
+                <p id="windSpeed"></p>
+                <img id="weatherIcon" alt="Weather icon">
             </div>
         </div>
     </div>
+    
 
     <a href="https://github.com/CyberSphinxxx">
         <div class="footer">

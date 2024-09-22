@@ -12,6 +12,19 @@ body {
     background-size: cover;
 }
 
+/* Universal Box Sizing */
+* {
+    box-sizing: border-box; /* Ensures padding and border are included in width */
+}
+
+/* Main Wrapper for Flexbox Layout */
+#containerWrapper {
+    display: flex;
+    justify-content: center; /* Center the items */
+    width: 90%; /* Full width */
+    margin: 0 auto; /* Center the container on the page */
+}
+
 /* Main Container */
 #bg_container {
     background-color: rgba(255, 255, 255, 0.85);
@@ -20,11 +33,21 @@ body {
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     text-align: center;
+    margin-right: 20px; /* Space between containers */
+    border: 1px, rgb(0, 0, 0);
+    border-style: solid;
 }
 
-/* Universal Box Sizing */
-* {
-    box-sizing: border-box; /* Ensures padding and border are included in width */
+/* More Info Container */
+#moreInfoContainer {
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    text-align: center;
+    border: 1px, rgb(0, 0, 0);
+    border-style: solid;
 }
 
 /* Input and Button Styling */
@@ -50,6 +73,7 @@ button:hover {
     background-color: #004d40;
 }
 
+/* Weather Info Styles */
 .weather-info {
     margin-top: 25px;
     color: #333;
@@ -74,30 +98,8 @@ button:hover {
     margin-top: 5px;
 }
 
-@media (max-width: 600px) {
-    #bg_container {
-        padding: 30px 20px;
-        width: 90%;
-    }
-
-    #temperature {
-        font-size: 2em;
-    }
-}
-
+/* Footer Styles */
 .footer {
-    position: fixed;
-    bottom: 10px; 
-    right: 10px;
-    font-size: 14px;
-    color: #ffffff;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 5px 10px;
-    border-radius: 5px;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
-}
-
-.footer_name {
     position: fixed;
     bottom: 10px; 
     right: 10px;
@@ -119,4 +121,18 @@ button:hover {
     padding: 5px 10px;
     border-radius: 5px;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Media Queries */
+@media (max-width: 600px) {
+    #bg_container, #moreInfoContainer {
+        max-width: 90%; /* Full width on smaller screens */
+        margin-right: 0; /* Remove right margin */
+    }
+}
+
+@media (min-width: 600px) {
+    #bg_container, #moreInfoContainer {
+        max-width: 45%; /* Adjust width for larger screens */
+    }
 }
