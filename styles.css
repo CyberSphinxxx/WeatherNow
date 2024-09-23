@@ -52,7 +52,7 @@ body {
     max-width: 400px;
     text-align: center;
     border: 1px, rgb(0, 0, 0);
-    border-style: solid;
+    border-style: solid; 
 }
 
 /* Input and Button Styling */
@@ -99,7 +99,7 @@ button:hover {
 
 #weatherDescription {
     font-size: 1.2em;
-    color: #666;
+    color: #00796b;
     margin-top: 5px;
 }
 
