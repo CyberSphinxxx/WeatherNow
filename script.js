@@ -15,10 +15,19 @@ async function getWeatherByCity(city) {
             document.getElementById('temperature').textContent         = `Temperature: ${data.main.temp}°C`;
             document.getElementById('weatherDescription').textContent  = `Weather: ${data.weather[0].description}`;
 
-
             // More detailed weather info
-            document.getElementById('humidity').textContent  = `Humidity: ${data.main.humidity}%`;
-            document.getElementById('windSpeed').textContent = `Wind Speed: ${data.wind.speed} m/s`;
+            document.getElementById('humidity').textContent   = `Humidity: ${data.main.humidity}%`;
+            document.getElementById('windSpeed').textContent  = `Wind Speed: ${data.wind.speed} m/s`;
+            document.getElementById('pressure').textContent    = `Pressure: ${data.main.pressure} hPa`;
+            document.getElementById('visibility').textContent  = `Visibility: ${data.visibility / 1000} km`; // Convert to km
+            document.getElementById('cloudiness').textContent  = `Cloudiness: ${data.clouds.all}%`;
+            
+            // Calculate sunrise and sunset times
+            const sunriseTime = new Date(data.sys.sunrise * 1000).toLocaleTimeString();
+            const sunsetTime = new Date(data.sys.sunset * 1000).toLocaleTimeString();
+            document.getElementById('sunrise').textContent = `Sunrise: ${sunriseTime}`;
+            document.getElementById('sunset').textContent = `Sunset: ${sunsetTime}`;
+            
             document.getElementById('weatherIcon').src       = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
 
             // Show more info container
@@ -32,6 +41,11 @@ async function getWeatherByCity(city) {
             document.getElementById('weatherDescription').textContent   = '';
             document.getElementById('humidity').textContent             = '';
             document.getElementById('windSpeed').textContent            = '';
+            document.getElementById('pressure').textContent             = '';
+            document.getElementById('visibility').textContent           = '';
+            document.getElementById('cloudiness').textContent           = '';
+            document.getElementById('sunrise').textContent              = '';
+            document.getElementById('sunset').textContent               = '';
         }
     }
     
@@ -55,11 +69,18 @@ async function getWeatherByLocation(lat, lon) {
             document.getElementById('temperature').textContent        = `Temperature: ${data.main.temp}°C`;
             document.getElementById('weatherDescription').textContent = `Weather: ${data.weather[0].description}`;
 
-
             // More detailed weather info
-            document.getElementById('humidity').textContent  = `Humidity: ${data.main.humidity}%`;
-            document.getElementById('windSpeed').textContent = `Wind Speed: ${data.wind.speed} m/s`;
-            document.getElementById('weatherIcon').src       = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+            document.getElementById('humidity').textContent   = `Humidity: ${data.main.humidity}%`;
+            document.getElementById('windSpeed').textContent  = `Wind Speed: ${data.wind.speed} m/s`;
+            document.getElementById('pressure').textContent    = `Pressure: ${data.main.pressure} hPa`;
+            document.getElementById('visibility').textContent  = `Visibility: ${data.visibility / 1000} km`; // Convert to km
+            document.getElementById('cloudiness').textContent  = `Cloudiness: ${data.clouds.all}%`;
+            
+            // Calculate sunrise and sunset times
+            const sunriseTime = new Date(data.sys.sunrise * 1000).toLocaleTimeString();
+            const sunsetTime = new Date(data.sys.sunset * 1000).toLocaleTimeString();
+            document.getElementById('sunrise').textContent = `Sunrise: ${sunriseTime}`;
+            document.getElementById('sunset').textContent = `Sunset: ${sunsetTime}`;
         }
         
         else {
